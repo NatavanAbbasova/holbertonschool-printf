@@ -60,26 +60,11 @@ int handle_mod(va_list args, int length)
  * @n: number
  * Return: RRRRRRRRRRRR
  */
-static int print_number(int n)
+void print_number(int n)
 {
-	int count = 0;
-
-	if (n < 0)
-	{
-		putchar('-');
-		count++;
-		if (n == -2147483648)
-		{
-			count += print_number(-(n / 10));
-			putchar('8');
-			return count + 1;
-		}
-		n = -n;
-	}
 	if (n / 10)
-		count += print_number(n / 10);
-	putchar((n % 10) + '0');
-	return count + 1;
+		print_number(n / 10);
+	putchar((n % 10 + '0');
 }
 
 /**
