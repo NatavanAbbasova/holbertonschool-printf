@@ -56,6 +56,18 @@ int handle_mod(va_list args, int length)
 }
 
 /**
+ * print_number - ozuduuuuu
+ * @n: number
+ * Return: RRRRRRRRRRRR
+ */
+void print_number(int n)
+{
+	if (n / 10)
+		print_number(n / 10);
+	putchar((n % 10 + '0'));
+}
+
+/**
  * print_int - vaaaaaaa
  * @args: argument
  * @length: length
@@ -64,7 +76,8 @@ int handle_mod(va_list args, int length)
 int print_int(va_list args, int length)
 {
 	int n = va_arg(args, int);
-	int temp = n, count = 0;
+	int temp = n;
+	int count = 0;
 
 	if (n == 0)
 	{
@@ -85,20 +98,7 @@ int print_int(va_list args, int length)
 			n = -n;
 	}
 
-	if (n / 10)
-	{
-		int num = n / 10;
-		if (num / 10)
-		{
-			int n2 = num / 10;
-			if (n2 / 10)
-				print_int_recursive(n2);
-			putchar((num % 10) + '0');
-		}
-		putchar((num % 10) + '0');
-	}
-	putchar((n % 10) + '0');
-
+	print_number(n);
 	while (temp != 0)
 	{
 		count++;
