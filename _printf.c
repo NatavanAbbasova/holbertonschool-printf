@@ -148,8 +148,13 @@ int _printf(const char *format, ...)
 				}
 			}
 
-			if (!found && format[i + 1] != '\0')
+			if (!found)
 			{
+				if (format[i + 1] == '\0')
+				{
+					va_end(args);
+					return (-1);
+				}
 				putchar('%');
 				putchar(format[i + 1]);
 				length += 2;
