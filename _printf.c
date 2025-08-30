@@ -135,19 +135,25 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == '\0')
-			{
-				va_end(args);
-				return (-1);
-			}
+			int found = 0;
+
 			for (j = 0; format_spec[j].specifier != NULL; j++)
 			{
-				if (format[i + 1] == format_spec[j].specifier[0])
+				if (format[i + 1] == *format_spec[j].specifier)
 				{
 					length = format_spec[j].func(args, length);
 					i++;
+					found = 1;
 					break;
 				}
+			}
+
+			if (!found && format[i + 1] != '\0')
+			{
+				putchar('%');
+				putchar(format[i + 1]);
+				length += 2;
+				i++;
 			}
 		}
 		else
