@@ -64,7 +64,7 @@ void print_number(int n)
 {
 	if (n / 10)
 		print_number(n / 10);
-	putchar((n % 10 + '0');
+	putchar((n % 10 + '0'));
 }
 
 /**
@@ -76,8 +76,36 @@ void print_number(int n)
 int print_int(va_list args, int length)
 {
 	int n = va_arg(args, int);
-	int printed = print_number(n);
-	return (length + printed);
+	int temp = n;
+	int count = 0;
+
+	if (n == 0)
+	{
+		putchar('0');
+		return (length + 1);
+	}
+
+	if (n < 0)
+	{
+		putchar('-');
+		length++;
+		if (n == -2147483648)
+		{
+			putchar('2');
+			n = 147483648;
+		}
+		else
+			n = -n;
+	}
+
+	print_number(n);
+	while (temp != 0)
+	{
+		count++;
+		temp /= 10;
+	}
+
+	return (length + count);
 }
 
 /**
