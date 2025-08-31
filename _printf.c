@@ -56,18 +56,6 @@ int handle_mod(va_list args, int length)
 }
 
 /**
- * print_number - ozuduuuuu
- * @n: number
- * Return: RRRRRRRRRRRR
- */
-void print_number(int n)
-{
-	if (n / 10)
-		print_number(n / 10);
-	putchar((n % 10 + '0'));
-}
-
-/**
  * print_int - vaaaaaaa
  * @args: argument
  * @length: length
@@ -75,37 +63,14 @@ void print_number(int n)
  */
 int print_int(va_list args, int length)
 {
-	int n = va_arg(args, int);
-	int temp = n;
-	int count = 0;
+	int i;
+	char number[100];
 
-	if (n == 0)
-	{
-		putchar('0');
-		return (length + 1);
-	}
-
-	if (n < 0)
-	{
-		putchar('-');
-		length++;
-		if (n == -2147483648)
-		{
-			putchar('2');
-			n = 147483648;
-		}
-		else
-			n = -n;
-	}
-
-	print_number(n);
-	while (temp != 0)
-	{
-		count++;
-		temp /= 10;
-	}
-
-	return (length + count);
+	sprintf(number, "%d", va_arg(args, int));
+	for (i = 0; number[i]; i++)
+		putchar(number[i]);
+	length += i;
+	return (length);
 }
 
 /**
@@ -125,49 +90,31 @@ int _printf(const char *format, ...)
 		{"d", print_int},
 		{NULL, NULL}
 	};
-
-	if (!format)
-		return (-1);
-
 	va_start(args, format);
-
+	if (format == NULL)
+		return (-1);
 	for (i = 0; format[i]; i++)
 	{
 		if (format[i] == '%')
 		{
-			int found = 0;
-
+			if (strlen(format) < 2 && format[i] == '%')
+				return (-1);
 			for (j = 0; format_spec[j].specifier != NULL; j++)
 			{
-				if (format[i + 1] == *format_spec[j].specifier)
+				if (format[i + 1] == format_spec[j].specifier[0])
 				{
 					length = format_spec[j].func(args, length);
 					i++;
-					found = 1;
 					break;
 				}
 			}
-
-			if (!found)
-			{
-				if (format[i + 1] == '\0')
-				{
-					va_end(args);
-					return (-1);
-				}
-				putchar('%');
-				putchar(format[i + 1]);
-				length += 2;
-				i++;
-			}
-		}
-		else
+		} else
 		{
+			if (i == 1 && strlen(format) <= 3)
+				return (write(1, format, strlen(format)));
 			putchar(format[i]);
 			length++;
 		}
 	}
-
-	va_end(args);
 	return (length);
 }
