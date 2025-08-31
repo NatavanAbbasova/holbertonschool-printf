@@ -1,3 +1,5 @@
+iki dene kitabxanani unutmusam burada 
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
@@ -40,19 +42,6 @@ int print_string(va_list args, int length)
 		length += i;
 	}
 	return (length);
-}
-
-/**
- * handle_mod - men demisdim %i menimsetek beyinnnnn
- * @args: hkfjdlfjljfl
- * @length: len
- * Return: R himmmmmmmmmm
- */
-int handle_mod(va_list args, int length)
-{
-	(void) args;
-	putchar('%');
-	return (length + 1);
 }
 
 /**
