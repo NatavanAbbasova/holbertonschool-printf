@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 #include "main.h"
 
 /**
