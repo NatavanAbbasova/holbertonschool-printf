@@ -1,0 +1,33 @@
+.TH _printf ucun kitabxana manual pagesi XD
+.SH NAME
+_printf.c idi deyesen
+.SH SYNOPSIS
+.B #include "main.h"
+.sp
+.B int _printf(const char *format, ...);
+.SH DESCRIPTION
+.B asagidakilar bu funksiyada sitifade edilib
+.TP
+.B %c
+chardidaaaa
+.TP
+.B %s
+bu da stringdideee
+.TP
+.B %d, %i
+unsigned deci intler
+.TP
+.B %%
+faiz isaresini cap etmek ucun
+.SH RETURN
+On success, character sayina, fail-de -1e return edir
+.SH meselem
+.nf
+_printf("Hello %s!\\n", "Natahana");
+   Cixis: Hello Natahana!
+.sp
+_printf("Deyer: %d\\n", 42);
+   Cixis: Deyer: 42
+.fi
+.SH AUTHOR
+Natahana yazibdi
